@@ -27,20 +27,17 @@
 <script>
 import { reactive } from "vue";
 import axios from "axios";
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
   name: "Login",
   setup() {
-    const store = useStore();
     const router = useRouter();
 
     const loginInfo = reactive({});
 
     function login() {
       axios.post("/login", loginInfo).then(function (res) {
-        store.dispatch("setNewAccessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
         if (res.status === 200) {
           router.push("/testing");

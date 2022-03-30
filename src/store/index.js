@@ -1,19 +1,9 @@
-import { createStore } from "vuex";
+import { defineStore } from "pinia";
 
-export default createStore({
-    state: {
-        accessToken: ""
-    },
-    getters: {},
-    mutations: {
-        setAccessToken(state, newAccessToken) {
-            state.accessToken = newAccessToken;
-        }
-    },
-    actions: {
-        setNewAccessToken: function ({ commit }, newAccessToken) {
-            commit("setAccessToken", newAccessToken);
-        }
-    },
-    modules: {}
+export const useStore = defineStore("auth", {
+    state: () => {
+        return {
+            accessToken: ""
+        };
+    }
 });
