@@ -45,30 +45,6 @@ axios.interceptors.response.use(
             return originalRes;
         }
 
-        // if (err.response.status === 403) {
-        // let refreshToken = localStorage.getItem("refreshToken");
-        // if (refreshToken) {
-        // let res = await axios.post("/refreshToken", {
-        // refreshToken: localStorage.getItem("refreshToken")
-        // });
-
-        // if (res.response && res.response.status === 401) {
-        // router.push("/login");
-        // return res;
-        // }
-
-        // authStore.accessToken = res.data.accessToken;
-        // authStore.isAuthenticated = true;
-
-        // let request = err.config;
-        // request.headers["Authorization"] =
-        // "Bearer " + authStore.accessToken;
-
-        // let originalRes = await axios(request);
-        // return originalRes;
-        // }
-        // }
-
         return err;
     }
 );
