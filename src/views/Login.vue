@@ -28,18 +28,25 @@
 import { reactive } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/index.js";
 
 export default {
   name: "Login",
   setup() {
+    const authStore = useAuthStore();
+
     const router = useRouter();
 
     const loginInfo = reactive({});
 
     function login() {
       axios.post("/login", loginInfo).then(function (res) {
-        localStorage.setItem("refreshToken", res.data.refreshToken);
         if (res.status === 200) {
+          localStorage.setItem("refreshToken", res.data.refreshToken);
+
+          authStore.accessToken = res.data.accessToken;
+          authStore.isAuthenticated = true;
+
           router.push("/testing");
         }
       });
